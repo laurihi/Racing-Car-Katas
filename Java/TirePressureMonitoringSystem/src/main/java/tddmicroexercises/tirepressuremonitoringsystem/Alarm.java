@@ -7,6 +7,12 @@ public class Alarm
 
     Sensor sensor = new Sensor();
 
+    public Alarm(){
+    	
+    }
+    public Alarm(Sensor sensor){
+    	this.sensor=sensor;
+    }
     boolean alarmOn = false;
 
     public void check()
