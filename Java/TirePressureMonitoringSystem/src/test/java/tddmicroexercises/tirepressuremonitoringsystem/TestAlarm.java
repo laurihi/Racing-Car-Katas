@@ -43,6 +43,22 @@ public class TestAlarm {
 	}
     
     @Test
+    public void shouldBeOnWhenValueAboveTreshold() throws Exception {
+    	AboveHighTresholdSensor sensor = new AboveHighTresholdSensor();
+    	alarm.sensor=sensor;
+    	alarm.check();
+    	assertEquals(true, alarm.isAlarmOn());
+    }
+
+    @Test
+    public void shouldBeOnWhenValueBelowTreshold() throws Exception {
+    	BelowLowTresholdSensor sensor = new BelowLowTresholdSensor();
+    	alarm.sensor=sensor;
+    	alarm.check();
+    	assertEquals(true, alarm.isAlarmOn());
+    }
+    
+    @Test
 	public void shouldBeOffWhenAtTheLowPressureTreshold() throws Exception {
     	Mockito.when(sensor.popNextPressurePsiValue()).thenReturn(LOW_PRESSURE_TRESHOLD);
 		alarm.check();
@@ -55,4 +71,25 @@ public class TestAlarm {
 		alarm.check();
 		assertEquals(false, alarm.isAlarmOn());
 	}
+    
+    
+    private class BelowLowTresholdSensor extends Sensor{
+
+		@Override
+		public double popNextPressurePsiValue() {
+			return 1d;
+		}
+    	
+    	
+    }
+    
+    private class AboveHighTresholdSensor extends Sensor{
+
+		@Override
+		public double popNextPressurePsiValue() {
+			return 26d;
+		}
+    	
+    	
+    }
 }
