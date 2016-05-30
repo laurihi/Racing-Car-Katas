@@ -9,8 +9,10 @@ import org.mockito.Mockito;
 
 public class TestAlarm {
 
-    
-	private Sensor sensor;
+    private static final Double LOW_PRESSURE_TRESHOLD = 17d;
+    private static final Double HIGH_PRESSURE_TRESHOLD = 21d;
+
+    private Sensor sensor;
 	private Alarm alarm;
 
 	@Before
@@ -42,14 +44,14 @@ public class TestAlarm {
     
     @Test
 	public void shouldBeOffWhenAtTheLowPressureTreshold() throws Exception {
-    	Mockito.when(sensor.popNextPressurePsiValue()).thenReturn(17d);
+    	Mockito.when(sensor.popNextPressurePsiValue()).thenReturn(LOW_PRESSURE_TRESHOLD);
 		alarm.check();
 		assertEquals(false, alarm.isAlarmOn());
 	}
     
     @Test
 	public void shouldBeOffWhenAtTheHighPressureTreshold() throws Exception {
-    	Mockito.when(sensor.popNextPressurePsiValue()).thenReturn(21d);
+    	Mockito.when(sensor.popNextPressurePsiValue()).thenReturn(HIGH_PRESSURE_TRESHOLD);
 		alarm.check();
 		assertEquals(false, alarm.isAlarmOn());
 	}
