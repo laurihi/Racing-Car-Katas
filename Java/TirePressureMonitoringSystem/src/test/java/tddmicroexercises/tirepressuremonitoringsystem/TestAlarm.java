@@ -45,7 +45,7 @@ public class TestAlarm {
     @Test
     public void shouldBeOnWhenValueAboveTreshold() throws Exception {
     	AboveHighTresholdSensor sensor = new AboveHighTresholdSensor();
-    	alarm.sensor=sensor;
+    	Alarm alarm = new Alarm(sensor);
     	alarm.check();
     	assertEquals(true, alarm.isAlarmOn());
     }
@@ -53,7 +53,7 @@ public class TestAlarm {
     @Test
     public void shouldBeOnWhenValueBelowTreshold() throws Exception {
     	BelowLowTresholdSensor sensor = new BelowLowTresholdSensor();
-    	alarm.sensor=sensor;
+    	Alarm alarm = new Alarm(sensor);
     	alarm.check();
     	assertEquals(true, alarm.isAlarmOn());
     }
